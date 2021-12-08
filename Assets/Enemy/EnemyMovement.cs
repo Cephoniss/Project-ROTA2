@@ -9,7 +9,8 @@ public class EnemyMovement : MonoBehaviour
     
     void Start()
     {
-        
+        FindPath();
+        ReturnToStart();
         StartCoroutine(FollowPath());
         
     }
@@ -31,9 +32,27 @@ public class EnemyMovement : MonoBehaviour
             //transform.position = waypoint.transform.position;
             //yield return new WaitForSeconds(waitTime);
         }
+        
+        Destroy(gameObject);
     }   
     
+    void FindPath()
+    {
+        path.Clear();
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");
+
+        foreach(GameObject waypoint in waypoints)
+        {
+            path.Add(waypoint.GetComponent<Waypoint>());
+        }
+
+        
+    }
     
+    void ReturnToStart()
+    {
+        transform.position = path[0].transform.position;
+    }
     
     // Update is called once per frame
     void Update()
