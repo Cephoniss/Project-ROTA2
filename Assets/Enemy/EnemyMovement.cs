@@ -6,14 +6,22 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
     [SerializeField] [Range(0f, 10f)]float speed = 1f;
+    Enemy enemy;
+
     
-    void Start()
+   void OnEnable()
     {
         FindPath();
         ReturnToStart();
         StartCoroutine(FollowPath());
         
     }
+
+    void Start()
+    {
+        enemy = GetComponent<Enemy>();
+    }
+
     IEnumerator FollowPath()
     {
         foreach(Waypoint waypoint in path)
@@ -33,7 +41,8 @@ public class EnemyMovement : MonoBehaviour
             //yield return new WaitForSeconds(waitTime);
         }
         
-        Destroy(gameObject);
+        enemy.LoseGold();
+        gameObject.SetActive(false);
     }   
     
     void FindPath()
