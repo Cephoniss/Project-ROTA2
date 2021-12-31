@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: a77eff50b2cf12d6f96a61f0e645bbb6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - House of the Dragon PERSONAL
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 45aa5819becd723fe8cbdb943798418f, type: 3}
+  - {fileID: 12800000, guid: f2b4f744fc7027983a78b8d20fcc8817, type: 3}
+  - {fileID: 12800000, guid: c64f4b51345bc1d829297ce59627a57b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Targeting : MonoBehaviour
 {
     [SerializeField] Transform weapon;
-    [SerializeField] float range = 15;
+    [SerializeField] float range = 25;
     [SerializeField] ParticleSystem projectileParticles;
     Transform target;
     
