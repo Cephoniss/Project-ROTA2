@@ -44,9 +44,13 @@ public class Waypoint : MonoBehaviour
         {
             bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position);
             //Instantiate(towerPrefab, transform.position, Quaternion.identity);
-            isPlaceable = !isPlaced;
+            //isPlaceable = !isPlaced;
             //Debug.Log(transform.name);
-            gridman.BlockNode(coordinates);
+            if(isPlaced)
+            {
+                gridman.BlockNode(coordinates);
+                pathfinder.Notify();
+            }
         }
         
     }

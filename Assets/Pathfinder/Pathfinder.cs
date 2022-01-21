@@ -5,7 +5,9 @@ using UnityEngine;
 public class Pathfinder : MonoBehaviour
 {
     [SerializeField] Vector2Int startCoordinates;
+    public Vector2Int StartCoordinates {get {return startCoordinates;}}
     [SerializeField] Vector2Int destinationCoordinates;
+    public Vector2Int DestomationCoordinates {get {return destinationCoordinates;}}
     
     GridMan gridMan;
     
@@ -29,6 +31,9 @@ public class Pathfinder : MonoBehaviour
         if(gridMan != null)
         {
             grid = gridMan.Grid;
+            startNode = grid[startCoordinates];
+            destinationNode = grid[destinationCoordinates];
+            
         }
 
         
@@ -37,16 +42,20 @@ public class Pathfinder : MonoBehaviour
 
     void Start()
     {
-        startNode = gridMan.Grid[startCoordinates];
-        destinationNode = gridMan.Grid[destinationCoordinates];
         
         GetNewPath();
+
     }
 
     public List<Node> GetNewPath()
     {
+        return GetNewPath(StartCoordinates);
+    }
+   
+    public List<Node> GetNewPath(Vector2Int coordinates)
+    {
         gridMan.ResetNodes();
-        BreadthFirstSearch();
+        BreadthFirstSearch(coordinates);
         return BuildPath();
     }
 
@@ -77,15 +86,18 @@ public class Pathfinder : MonoBehaviour
         }
    }
     
-    void BreadthFirstSearch()
+    void BreadthFirstSearch(Vector2Int coordinates)
     {
+        startNode.isWalkable = true;
+        destinationNode.isWalkable = true;
+        
         frontier.Clear();
         reached.Clear();
         
         bool isRunning = true;
 
-        frontier.Enqueue(startNode);
-        reached.Add(startCoordinates, startNode);
+        frontier.Enqueue(grid[coordinates]);
+        reached.Add(coordinates, grid[coordinates]);
 
         while(frontier.Count > 0 && isRunning)
         {
@@ -137,5 +149,10 @@ public class Pathfinder : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Notify()
+    {
+        BroadcastMessage("FindPath", false, SendMessageOptions.DontRequireReceiver);
     }
 }
